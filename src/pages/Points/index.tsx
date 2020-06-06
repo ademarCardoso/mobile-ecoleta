@@ -1,10 +1,74 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image } from 'react-native'
+import Constants from 'expo-constants'
+import { Feather as Icon } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import MapView, { Marker } from 'react-native-maps'
+import { SvgCssUri, SvgUri } from 'react-native-svg'
 
 const Points = () => {
+  const navigation = useNavigation()
+
+  function handleNavigateBack() {
+     navigation.goBack()
+  }
+
+  function handleNavigateToDetail() {
+    navigation.navigate("Detail")
+  }
+
   return (
-    <View >
+    <>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={handleNavigateBack}>
+        <Icon name="arrow-left" size={20} color="#34cb79" />
+      </TouchableOpacity>
+
+      <Text style={styles.title}>Bem vindo.</Text>
+      <Text style={styles.description}>Encontre no mapa um ponto de coleta.</Text>
+
+      <View style={styles.mapContainer}>
+        <MapView 
+          style={styles.map} 
+          initialRegion={{
+            latitude: -22.6592263,
+            longitude: -43.1490076,
+            latitudeDelta: 0.014,
+            longitudeDelta: 0.014,
+          }}
+        >
+          <Marker 
+            onPress={handleNavigateToDetail}
+            style={styles.mapMarker}
+            coordinate={{
+              latitude: -22.6592263,
+              longitude: -43.1490076,
+            }}>
+            <View style={styles.mapMarkerContainer}>
+              <Image 
+                style={styles.mapMarkerImage} 
+                source={{ uri: "https://s2.glbimg.com/vmo9jpOdJ51CkO8NMtjPK5RNIHg=/512x320/smart/e.glbimg.com/og/ed/f/original/2018/10/11/como-gastar-menos-no-mercado.jpg"}}/>
+              <Text style={styles.mapMarkerTitle}>Mercado</Text>
+            </View>
+          </Marker>
+        </MapView>
+      </View>
     </View>
+
+    <View style={styles.itemsContainer}>
+      <ScrollView 
+        horizontal 
+        showsHorizontalScrollIndicator={false} 
+        contentContainerStyle={{
+          paddingHorizontal: 20
+        }}>
+        <TouchableOpacity style={styles.item} onPress={() => { }}>
+          <SvgUri width={42} height={42} uri="http://192.168.50.162:3333/uploads/lampadas.svg" />
+          <Text style={styles.itemTitle}>Lâmpadas</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+    </>
   )
 }
 
