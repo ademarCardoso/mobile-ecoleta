@@ -1,8 +1,8 @@
 # Mobile E-Coleta
 
 <p align="center">
-<img width="453" heigth="702" src="./src/assets/example.jpeg" title="Image of app translation"/>
 <img width="453" heigth="702" src="./src/assets/example2.jpeg" title="Image of app translation"/>
+<img width="453" heigth="702" src="./src/assets/example.jpeg" title="Image of app translation"/>
 </p>
 
 ## Description
